@@ -13,8 +13,8 @@ alat_fit = np.array(fit_result['alat(a.u.)'])
 alat_min_en = alat_fit[energy_fit == np.min(energy_fit)][0]
 print(f'lattice parameter corresponding to minimum energy: {alat_min_en} a.u.')
 
-plt.plot(alat_exp, energy_exp, 'o', label='experimental data', color='red')
 plt.plot(alat_fit, energy_fit, label='fit')
+plt.plot(alat_exp, energy_exp, 'o', label='experimental data', color='red')
 plt.xlabel('alat (a.u.)')
 plt.ylabel('energy (Ry)')
 plt.title('Energy vs lattice parameter')
