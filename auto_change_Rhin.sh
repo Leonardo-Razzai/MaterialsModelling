@@ -5,6 +5,7 @@
 # - save result to Rh*.pwo with correct name to match alat value
 
 mul_fact=8 # multiplication factor to get ecutrho from ecutwfc
+ecutwfc=$1
 ecutrho=$(($ecutwfc * $mul_fact))
 echo "ecutwfc = $ecutwfc, ecutrho = $ecutrho
 "
