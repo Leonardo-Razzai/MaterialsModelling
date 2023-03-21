@@ -4,6 +4,10 @@
 # - put to murn.in with used lat. params. found in alat_used.dat
 # - fit murn.in by Murnagham fit
 # - write murn.dat with fitted energy(Ry) and alat(a.u.)
+
+# NOTE:  
+# 1) murn.in is saved murn_<ecutwfc>.in, where ecutwfc is the cut off energy set in the Rh.pwi file
+# 2) requires murn_30.in to exist in the folder
 E=$1
 
 # grep from .pwo and write to murn.in 
