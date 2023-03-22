@@ -2,11 +2,10 @@
 # Script to set lattice parameter in Rh.pwi
 
 mul_fact=8 # multiplication factor to get ecutrho from ecutwfc
-ecutwfc=35
+ecutwfc=$1 # first input at command line
 ecutrho=$(($ecutwfc * $mul_fact))
-echo "ecutwfc = $ecutwfc, ecutrho = $ecutrho
-"
-alat=$1 # input string at command line
+
+alat=$2 # input string at command line
 echo "Set celldm(1) = $alat" in Rh.pwi
 # change celldm(1) in Rh.pwi
 head -10 Rh.pwi > temp1
