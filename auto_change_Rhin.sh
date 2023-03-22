@@ -5,33 +5,33 @@
 # - save result to Rh*.pwo with correct name to match alat value
 
 mul_fact=8 # multiplication factor to get ecutrho from ecutwfc
-ecutwfc=$1
+echo Insert cut off energy : 
+read ecutwfc
 ecutrho=$(($ecutwfc * $mul_fact))
-echo "ecutwfc = $ecutwfc, ecutrho = $ecutrho
+
+echo Insert lattice parameter :
+read alat
+
+echo "Set values: 
+ecutwfc = $ecutwfc, 
+ecutrho = $ecutrho,
+celldm(1) = $alat
 "
-dec_alat=3 # decimal part of lattice parameter, integer one is 7
+int_alat=${alat:0:1}
+dec_alat=${alat:2:1}
 
 # increment decimal part from dec_alat-3 to dec_alat+3
 # for each value do
 for i in {-3..3..1}
 do
   inc_alat=$(($i + $dec_alat))
-  echo "Set celldm(1) = 7.$inc_alat" in Rh.pwi
+  new_alat="$int_alat.$inc_alat"
   # change celldm(1) in Rh.pwi
-  head -10 Rh.pwi > temp1
-  echo "    celldm(1) = 7.$inc_alat" > temp2
-  echo "    nat = 1" >> temp2
-  echo "    ntyp = 1" >> temp2
-  echo "    ecutwfc = $ecutwfc" >> temp2
-  echo "    ecutrho = $ecutrho" >> temp2
-  tail -22 Rh.pwi > temp3 
-  cat temp1 temp2 temp3 > Rh.pwi
-  rm temp*
-  echo "Executing joscript on Rh.pwi"
+  bash set_alat.sh $ecutwfc $new_alat
+  echo "Executing jobscript_change_alat on Rh.pwi"
   # execute jobscript on this new Rh.pwi and put result to Rh*.pwo
-  alat="7.$inc_alat"
-  sbatch jobscript Rh_$alat
-  echo "Saved result to Rh_$alat.pwo
+  # sbatch jobscript_change_alat Rh _$alat
+  echo "Saved result to Rh_$new_alat.pwo
   " 
 done
 
