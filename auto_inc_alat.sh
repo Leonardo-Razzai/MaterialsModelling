@@ -30,7 +30,7 @@ do
   bash set_alat.sh $ecutwfc $new_alat
   echo "Executing jobscript_change_alat on Rh.pwi"
   # execute jobscript on this new Rh.pwi and put result to Rh*.pwo
-  # sbatch jobscript_change_alat Rh _$alat
+  sbatch jobscript Rh_$new_alat
   echo "Saved result to Rh_$new_alat.pwo
   " 
 done
