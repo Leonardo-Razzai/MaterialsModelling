@@ -30,7 +30,7 @@ do
   echo "Executing joscript on Rh.pwi"
   # execute jobscript on this new Rh.pwi and put result to Rh*.pwo
   alat="7.$inc_alat"
-  sbatch jobscript Rh_alat
+  sbatch jobscript Rh_$alat
   echo "Saved result to Rh_$alat.pwo
   " 
 done
