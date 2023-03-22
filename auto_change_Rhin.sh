@@ -29,8 +29,9 @@ do
   rm temp*
   echo "Executing joscript on Rh.pwi"
   # execute jobscript on this new Rh.pwi and put result to Rh*.pwo
-  # sbatch jobscript Rh > Rh7.$inc_alat.pwo
-  echo "Saved result to Rh_7.$inc_alat.pwo
+  alat="7.$inc_alat"
+  sbatch jobscript Rh_alat
+  echo "Saved result to Rh_$alat.pwo
   " 
 done
 
