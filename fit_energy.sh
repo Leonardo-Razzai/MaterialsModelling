@@ -6,9 +6,10 @@
 # - write murn.dat with fitted energy(Ry) and alat(a.u.)
 
 # NOTE:  
-# 1) murn.in is saved murn_<ecutwfc>.in, where ecutwfc is the cut off energy set in the Rh.pwi file
+# 1) murn.in is saved as murn_<ecutwfc>.in, where <ecutwfc> is the cut off energy set in the Rh.pwi file
 # 2) requires murn_30.in to exist in the folder
-E=$1
+
+E=$1 # <ecutwfc> given from command line input
 
 # grep from .pwo and write to murn.in 
 grep ! Rh*.pwo > temp 
