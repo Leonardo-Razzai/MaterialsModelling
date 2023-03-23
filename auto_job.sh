@@ -24,7 +24,7 @@ dec_alat=${alat:2:1}
 # for each value do
 # change celldm(1) in Rh.pwi
 bash set_alat.sh $ecutwfc $alat
-echo "Executing jobscript_change_alat on Rh_$alat.pwi"
+echo "Executing jobscript on Rh_$alat.pwi"
 # execute jobscript on this new Rh.pwi and put result to Rh*.pwo
 sbatch jobscript Rh_$alat
 echo "Saved result to Rh_$alat.pwo
