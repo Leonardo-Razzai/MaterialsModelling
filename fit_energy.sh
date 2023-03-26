@@ -10,7 +10,8 @@
 # 2) requires murn_30.in to exist in the folder
 
 E=$1 # <ecutwfc> given from command line input
-
+min_alat=6.9
+max_alat=7.7
 # grep from .pwo and write to murn.in 
 grep ! Rh*.pwo > temp 
 awk '{print $5, $6}' temp > temp1
