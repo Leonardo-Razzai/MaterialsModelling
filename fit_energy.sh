@@ -3,19 +3,29 @@
 # - grep all the total energies from Rh*.pwo
 # - put to murn.in with used lat. params. found in alat_used.dat
 # - fit murn.in by Murnagham fit
-# - write murn.dat with fitted energy(Ry) and alat(a.u.)
+# - write data to be analyzed with energy(Ry) and alat(a.u.)
 
 # NOTE:  
-# 1) murn.in is saved as murn_<ecutwfc>.in, where <ecutwfc> is the cut off energy set in the Rh.pwi file
-# 2) requires murn_30.in to exist in the folder
+# 1) murn.in is saved murn_<ecutwfc>.in, where ecutwfc hat to be 
+#    the cut off energy set in the Rh.pwi file
+# 2) data are saved to files called:
+#    - en_vs_alat_fit_<ecutwfc>.dat : containing result of fit
+#    - en_vs_alat_exp_<ecutwfc>.dat : conatining 
 
-E=$1 # <ecutwfc> given from command line input
+E=$1
 min_alat=6.9
 max_alat=7.7
 # grep from .pwo and write to murn.in 
 grep ! Rh*.pwo > temp 
 awk '{print $5, $6}' temp > temp1
-head -5 murn_30.in > murn_$E.in
+
+# write head of murn.in
+echo "1
+1
+$min_alat $max_alat 500
+7
+" > murn_$E.in
+
 paste -d" " alat_used.dat temp1 >> murn_$E.in
 rm temp*
 
