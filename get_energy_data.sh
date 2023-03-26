@@ -12,11 +12,14 @@
 #    - en_vs_alat_fit_<ecutwfc>.dat : containing result of fit
 #    - en_vs_alat_exp_<ecutwfc>.dat : conatining 
 
-E=$1
-min_alat=6.9
-max_alat=7.7
+echo "Insert cutoff energy value set in .pwi file : "
+read E
+echo "Minimum lattice parameter for fit : " 
+read min_alat
+echo "Ma lattice parameter for fit : "
+read max_alat
 # grep from .pwo and write to murn.in 
-grep ! Rh*.pwo > temp 
+grep ! *$E*.pwo > temp 
 awk '{print $5, $6}' temp > temp1
 
 # write head of murn.in
