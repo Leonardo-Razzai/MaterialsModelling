@@ -3,3 +3,4 @@ jobscript
 murn_*
 *.pwo
 *.pwi
+*.pyc
