@@ -14,59 +14,61 @@ source /home/software/materia/intel_lib/setvars.sh --force
 export I_MPI_PMI_LIBRARY=/usr/lib/x86_64-linux-gnu/libpmi2.so.0
 export I_MPI_FABRICS=shm:dapl
 
-ecut="35"
-celldim="7.2447"
-<<<<<<< HEAD
-k_points=" 3 4 5 "
-=======
-k_points=" 10 11 12 13 14 15 16 17 18 19 20 "
->>>>>>> d84bf9a28bc50c55376c47e27d37676621540413
-ecut8=`awk 'BEGIN {print 8*'$ecut'}' `
+n_layers=" 3 4 5 6 7 8 9 "
 
-for i in $k_points
+cat > n_layers_used.dat
+for i in $n_layers
 do
 
-FILE=k_points_0$i
+python3 generate_points.py $i
+echo $i >> n_layers_used.dat
+
+FILE=n_layers$i
 
 cat > $FILE.pwi << EOF
- &control
-    calculation = 'scf'
+&CONTROL
+    calculation = 'relax'
     restart_mode = 'from_scratch'
-    verbosity = 'default'
-    prefix = Rh_bulk
-    pseudo_dir = '/home/software/materia/pseudo',
-    outdir = '/home/STUDENTI/leonardo.razzai/WORK/k_points'
+    pseudo_dir = '/home/software/materia/pseudo'
+    outdir = '/home/STUDENTI/leonardo.razzai/WORK/Rh_111'
+    prefix = '9L'
     disk_io = 'nowf'
- /
- &system    
-    ibrav = 2
-    celldm(1) = $celldim
-    nat = 1
+    max_seconds = 36000
+/
+&SYSTEM
+    ibrav = 4
+    celldm(1) = 5.122776
+    celldm(3) = 10.96
+    nat = $i
     ntyp = 1
-    ecutwfc = $ecut 
-    ecutrho = $ecut8
+    ecutwfc = 35
+    ecutrho = 280
     nspin = 2
     starting_magnetization(1) = 0.01
     occupations = 'smearing'
     smearing = 'gaussian'
     degauss = 0.02
- /
- &electrons
+/
+&ELECTRONS
     diagonalization = 'david'
     electron_maxstep = 200
-    mixing_mode = 'plain'
+    mixing_mode = 'local-TF'
     mixing_beta = 0.40
     conv_thr = 1.0d-6
 /
 
 ATOMIC_SPECIES
-Rh      102.905    rh_pbe_v1.4.uspp.F.UPF
+Rh      102.905    rh_pbe_v1.4.uspp.F.UPF 
 
 ATOMIC_POSITIONS angstrom
-Rh   0.00   0.00   0.00
+EOF
+
+cat points.txt >> $FILE.pwi
+
+cat >> $FILE.pwi << EOF
 
 K_POINTS automatic
-$i $i $i   1 1 1
+9 9 1 1 1 0
 
 EOF
 
