@@ -2,14 +2,24 @@ import matplotlib.pyplot as plt
 from alat_sample import ecut_sample
 import pandas as pd
 
+MEDIUM_SIZE = 19
+BIGGER_SIZE = 22
+
+plt.rc('font', size=MEDIUM_SIZE)          # controls default text sizes
+plt.rc('axes', titlesize=BIGGER_SIZE)     # fontsize of the axes title
+plt.rc('axes', labelsize=MEDIUM_SIZE)    # fontsize of the x and y labels
+plt.rc('xtick', labelsize=MEDIUM_SIZE)    # fontsize of the tick labels
+plt.rc('ytick', labelsize=MEDIUM_SIZE)    # fontsize of the tick labels
+plt.rc('legend', fontsize=MEDIUM_SIZE)    # legend fontsize
+
 base_font = {'family': 'serif',
         'color':  'black',
-        'size': 19,
+        'size': MEDIUM_SIZE,
         }
 
 title_font = {'family': 'serif',
         'color':  'black',
-        'size': 22,
+        'size': BIGGER_SIZE,
         'weight' : 'normal'
         }
 
