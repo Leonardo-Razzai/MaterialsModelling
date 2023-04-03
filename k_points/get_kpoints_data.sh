@@ -17,7 +17,6 @@ rm k_points_used.dat
 for (( i=$start_k; i<=$last_k; i++))
 do
 	echo $i >> k_points_used.dat
-	echo $i
 done
 
 paste -d" " k_points_used.dat temp1 >> en_vs_kpoints.dat
