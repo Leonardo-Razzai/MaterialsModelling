@@ -1,0 +1,39 @@
+&CONTROL
+    calculation = 'relax'
+    restart_mode = 'from_scratch'
+    pseudo_dir = '/home/software/materia/pseudo'
+    outdir = '/home/STUDENTI/leonardo.razzai/WORK'
+    max_seconds = 1200
+    tstress=.true.
+/
+&SYSTEM
+    ibrav = 1
+    a = 30.
+    nat = 3
+    ntyp = 2
+    ecutwfc = 35.0
+    ecutrho = 280.0
+ /
+&ELECTRONS
+    diagonalization = 'david'
+    electron_maxstep = 200
+    mixing_mode = 'plain'
+    mixing_beta = 0.6
+    conv_thr = 1.0d-8
+/
+&IONS
+    ion_dynamics = 'bfgs'
+/
+
+ATOMIC_SPECIES
+        O  15.9990 O.pbe-n-rrkjus_psl.1.0.0.UPF   
+        H  1.00784 H.pbe-rrkjus_psl.1.0.0.UPF
+
+ATOMIC_POSITIONS angstrom
+O 0.747915 -0.0478235 9.65945
+H -0.111886 0.00215308 9.18876
+H 0.929384 0.903371 9.91393
+
+K_POINTS gamma
+
+
