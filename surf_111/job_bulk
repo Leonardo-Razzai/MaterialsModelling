@@ -21,7 +21,7 @@ cat > $FILE.pwi << EOF
     calculation = 'relax'
     restart_mode = 'from_scratch'
     pseudo_dir = '/home/software/materia/pseudo'
-    outdir = '/home/STUDENTI/leonardo.razzai/WORK/relax_surf'
+    outdir = '/home/STUDENTI/leonardo.razzai/Rh_work/surf_111'
     prefix = 'Rh111_bulk'
     disk_io = 'nowf'
     max_seconds = 36000

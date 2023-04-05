@@ -16,11 +16,7 @@ export I_MPI_FABRICS=shm:dapl
 
 ecut="35"
 celldim="7.2447"
-<<<<<<< HEAD
 k_points=" 3 4 5 "
-=======
-k_points=" 10 11 12 13 14 15 16 17 18 19 20 "
->>>>>>> d84bf9a28bc50c55376c47e27d37676621540413
 ecut8=`awk 'BEGIN {print 8*'$ecut'}' `
 
 for i in $k_points
@@ -35,7 +31,7 @@ cat > $FILE.pwi << EOF
     verbosity = 'default'
     prefix = Rh_bulk
     pseudo_dir = '/home/software/materia/pseudo',
-    outdir = '/home/STUDENTI/leonardo.razzai/WORK/k_points'
+    outdir = '/home/STUDENTI/leonardo.razzai/Rh_work/k_points'
     disk_io = 'nowf'
  /
  &system    
