@@ -1,0 +1,72 @@
+#!/bin/bash -l
+#SBATCH --time=00:60:00
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=8
+#SBATCH --sockets-per-node=2
+#SBATCH --mem=10G
+#SBATCH --job-name=mcr
+#SBATCH --output=JOB.o
+#SBATCH --error=JOB.e
+
+export PW=/home/software/materia/qe-6.7.0/bin/pw.x
+
+source /home/software/materia/intel_lib/setvars.sh --force
+export I_MPI_PMI_LIBRARY=/usr/lib/x86_64-linux-gnu/libpmi2.so.0
+export I_MPI_FABRICS=shm:dapl
+
+FILE=Rh_bulk
+
+cat > $FILE.pwi << EOF
+&CONTROL
+    calculation = 'relax'
+    restart_mode = 'from_scratch'
+    pseudo_dir = '/home/software/materia/pseudo'
+    outdir = '/home/STUDENTI/leonardo.razzai/WORK/relax_surf'
+    prefix = 'Rh111_bulk'
+    disk_io = 'nowf'
+    max_seconds = 36000
+/
+&SYSTEM
+    ibrav = 4
+    celldm(1) = 5.122776
+    celldm(3) = 2.449490
+    nat = 3
+    ntyp = 1
+    ecutwfc = 35
+    ecutrho = 280
+    nspin = 2
+    starting_magnetization(1) = 0.01
+    occupations = 'smearing'
+    smearing = 'gaussian'
+    degauss = 0.02
+/
+&ELECTRONS
+    diagonalization = 'david'
+    electron_maxstep = 200
+    mixing_mode = 'local-TF'
+    mixing_beta = 0.40
+    conv_thr = 1.0d-6
+/
+&IONS
+    ion_dynamics = 'bfgs'
+    upscale = 10
+/
+
+ATOMIC_SPECIES
+Rh      102.905    rh_pbe_v1.4.uspp.F.UPF 
+
+ATOMIC_POSITIONS angstrom
+Rh   0.0000000   0.0000000   0.0000000
+Rh   1.3554284   -0.7825569   2.2134053
+Rh   1.3554284   0.7825569   4.4268106
+
+K_POINTS automatic
+9 9 4 1 1 1
+
+EOF
+
+#>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# running
+
+cd $SLURM_SUBMIT_DIR
+srun --cpu-bind=core $PW  -input  $FILE.pwi >> $FILE.pwo

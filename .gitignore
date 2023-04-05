@@ -7,3 +7,4 @@ murn_*
 *.save
 *.update
 *.bfgs
+*CRASH
