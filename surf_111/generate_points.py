@@ -10,7 +10,7 @@ def get_celldm3(points):
   zmax = last_point[2]
   celldm3 = (zmax + empty_space) / a
   return celldm3
-  
+ 
 n_layers = int(sys.argv[1])
 # n_layers = 9
 
@@ -21,7 +21,7 @@ a3 = a * np.array([0, 0, np.sqrt(6)])
 
 base_points = [
   a * np.array([0, 0, 0]), # A
-  a * np.array([1/2, -np.sqrt(3) / 6, 0]) + a2, # B
+  a * np.array([1/2, -np.sqrt(3) / 6, 0]), # B
   a * np.array([1/2, np.sqrt(3) / 6, 0]), # C
 ]
 
@@ -34,5 +34,8 @@ with open('points.txt', 'w') as file:
     points.append(inc_point)
     print_point(file=file, point=inc_point)
 
-# print(f"celldm(1) = {a_bohr:.6f}")
-# print(f"celldm(3) = {get_celldm3(points):.2f}")
+print(f"celldm(1) = {a_bohr:.6f}")
+print("Bulk: ")
+print(f"celldm(3) = {np.sqrt(6):.6f}")
+print("Surface: ")
+print(f"celldm(3) = {get_celldm3(points):.6f}")
