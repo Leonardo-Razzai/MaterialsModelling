@@ -21,7 +21,6 @@ for i in $n_layers
 do
 
 python3 generate_points_surf.py $i
-echo $i >> n_layers_used.dat
 
 FILE=n_layers$i
 
