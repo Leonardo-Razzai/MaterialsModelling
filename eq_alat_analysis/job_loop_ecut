@@ -34,7 +34,7 @@ cat > $FILE.pwi << EOF
     verbosity = 'default'
     prefix = Rh_bulk
     pseudo_dir = '/home/software/materia/pseudo',
-    outdir = '/home/STUDENTI/leonardo.razzai/WORK/eq_alat_analysis'
+    outdir = '/home/STUDENTI/leonardo.razzai/Rh_work/eq_alat_analysis'
     disk_io = 'nowf'
  /
  &system    
