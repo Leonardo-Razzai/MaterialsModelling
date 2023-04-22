@@ -33,5 +33,3 @@ with open('points.txt', 'w') as file:
     points.append(inc_point)
     print_point(file=file, point=inc_point)
 
-# print(f"celldm(1) = {a_bohr:.6f}")
-# print(f"celldm(3) = {get_celldm3(points):.6f}")

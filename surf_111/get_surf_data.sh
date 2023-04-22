@@ -2,7 +2,7 @@
 # This script is meant to automate the process of:
 # - grep all the total energies from n_layers*.pwo
 # - write data to be analyzed with n_layers and corresponding energies (Ry)
-#   to file en_vs_kpoints.dat
+#   to file en_vs_nlayers.dat
 
 # grep from .pwo
 echo Min num layers:
@@ -10,7 +10,7 @@ read min
 echo Max num layers:
 read max
 
-cat > n_layers_used.dat
+rm n_layers_used.dat
 for (( i=$min; i<=$max; i++))
 do
 	echo $i >> n_layers_used.dat
