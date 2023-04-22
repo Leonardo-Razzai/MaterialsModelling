@@ -28,7 +28,7 @@ cat > $FILE.pwi << EOF
 &CONTROL
     calculation = 'relax'
     restart_mode = 'from_scratch'
-    pseudo_dir = '/home/software/materia/pseudo'
+    pseudo_dir = '/home/software.old/materia/pseudo'
     outdir = '/home/STUDENTI/leonardo.razzai/Rh_work/surf_111'
     prefix = '$i-L'
     disk_io = 'nowf'
