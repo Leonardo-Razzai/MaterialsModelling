@@ -1,0 +1,25 @@
+#!/bin/bash -l
+#SBATCH --time=01:00:00
+#SBATCH --nodes=1
+#SBATCH --mem=64G
+#SBATCH --constraint=ib          
+#SBATCH --ntasks-per-node=16
+#SBATCH --sockets-per-node=2
+#SBATCH --partition=b1,b2,b3,b4,b5,m1,m2
+#SBATCH --job-name=@_@
+#SBATCH --output=JOB.o
+
+module load materia/qe/7.1_openmpi
+
+n_layers=" 4 "
+
+for i in $n_layers
+do
+
+FILE=n_layers$i
+
+bash create111_pwi $i
+
+srun -n 16 pw.x -nk 1 -input $FILE.pwi > $FILE.pwo
+
+done

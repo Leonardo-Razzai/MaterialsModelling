@@ -1,0 +1,54 @@
+#!/bin/bash
+
+FILE=$1
+
+cat > $FILE.pwi << EOF
+&CONTROL
+    calculation = 'relax'
+    restart_mode = 'from_scratch'
+    pseudo_dir = '/home/software.old/materia/pseudo'
+    outdir = '/home/STUDENTI/leonardo.razzai/Rh_work/surf_111'
+    prefix = '$FILE-L'
+    disk_io = 'nowf'
+    max_seconds = 36000
+/
+&SYSTEM
+    ibrav = 4
+    celldm(1) = 10.245552
+    celldm(3) = 4.89897948
+    nat = 16
+    ntyp = 1
+    ecutwfc = 35
+    ecutrho = 280
+    nspin = 2
+    starting_magnetization(1) = 0.01
+    occupations = 'smearing'
+    smearing = 'gaussian'
+    degauss = 0.02
+/
+&ELECTRONS
+    diagonalization = 'david'
+    electron_maxstep = 200
+    mixing_mode = 'local-TF'
+    mixing_beta = 0.40
+    conv_thr = 1.0d-6
+/
+&IONS
+    ion_dynamics = 'bfgs'
+    upscale = 10
+/
+
+ATOMIC_SPECIES
+Rh      102.905    rh_pbe_v1.4.uspp.F.UPF 
+
+ATOMIC_POSITIONS angstrom
+EOF
+
+cat surf_coor.dat >> $FILE.pwi
+
+cat >> $FILE.pwi << EOF
+
+K_POINTS automatic
+5 5 1 1 1 0
+
+EOF

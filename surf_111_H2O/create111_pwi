@@ -1,0 +1,59 @@
+#!/bin/bash
+
+num_layers=$1
+python3 generate_coor111.py $num_layers
+
+FILE=n_layers$num_layers
+
+cat > $FILE.pwi << EOF
+&CONTROL
+    calculation = 'relax'
+    restart_mode = 'from_scratch'
+    pseudo_dir = '/home/software.old/materia/pseudo'
+    outdir = '/home/STUDENTI/leonardo.razzai/Rh_work/surf_111_H2O'
+    prefix = '$num_layers-L'
+    disk_io = 'nowf'
+    max_seconds = 36000
+/
+&SYSTEM
+    ibrav = 4
+    celldm(1) = 5.122776
+    celldm(3) = 9.79795897113
+    nat = $num_layers
+    ntyp = 1
+    ecutwfc = 35
+    ecutrho = 280
+    nspin = 2
+    starting_magnetization(1) = 0.01
+    occupations = 'smearing'
+    smearing = 'gaussian'
+    degauss = 0.02
+/
+&ELECTRONS
+    diagonalization = 'david'
+    electron_maxstep = 200
+    mixing_mode = 'local-TF'
+    mixing_beta = 0.40
+    conv_thr = 1.0d-6
+/
+&IONS
+    ion_dynamics = 'bfgs'
+    upscale = 10
+/
+
+ATOMIC_SPECIES
+Rh      102.905    rh_pbe_v1.4.uspp.F.UPF 
+
+ATOMIC_POSITIONS angstrom
+EOF
+
+cat coor_111_$num_layers.dat >> $FILE.pwi
+
+cat >> $FILE.pwi << EOF
+
+K_POINTS automatic
+9 9 1 1 1 0
+
+EOF
+
+rm coor_111_$num_layers.dat
