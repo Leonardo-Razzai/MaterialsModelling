@@ -1,18 +1,15 @@
 #!/bin/bash -l
-#SBATCH --time=00:60:00
+#SBATCH --time=01:00:00
 #SBATCH --nodes=1
-#SBATCH --ntasks-per-node=8
+#SBATCH --mem=64G
+#SBATCH --constraint=ib          
+#SBATCH --ntasks-per-node=16
 #SBATCH --sockets-per-node=2
-#SBATCH --mem=10G
-#SBATCH --job-name=mcr
+#SBATCH --partition=b1,b2,b3,b4,b5,m1,m2
+#SBATCH --job-name=@_@
 #SBATCH --output=JOB.o
-#SBATCH --error=JOB.e
 
-export PW=/home/software/materia/qe-6.7.0/bin/pw.x
-
-source /home/software/materia/intel_lib/setvars.sh --force
-export I_MPI_PMI_LIBRARY=/usr/lib/x86_64-linux-gnu/libpmi2.so.0
-export I_MPI_FABRICS=shm:dapl
+module load materia/qe/7.1_openmpi
 
 FILE=Rh_bulk
 
@@ -68,5 +65,4 @@ EOF
 #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 # running
 
-cd $SLURM_SUBMIT_DIR
-srun --cpu-bind=core $PW  -input  $FILE.pwi >> $FILE.pwo
+srun -n 16 pw.x -nk 1 -input $FILE.pwi > $FILE.pwo
