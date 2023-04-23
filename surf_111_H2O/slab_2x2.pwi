@@ -1,0 +1,59 @@
+&CONTROL
+    calculation = 'relax'
+    restart_mode = 'from_scratch'
+    pseudo_dir = '/home/software.old/materia/pseudo'
+    outdir = '/home/STUDENTI/leonardo.razzai/Rh_work/surf_111_H2O'
+    prefix = 'slab_2x2-L'
+    disk_io = 'nowf'
+    max_seconds = 72000
+/
+&SYSTEM
+    ibrav = 4
+    celldm(1) = 10.245552
+    celldm(3) = 4.89897948
+    nat = 16
+    ntyp = 1
+    ecutwfc = 35
+    ecutrho = 280
+    nspin = 2
+    starting_magnetization(1) = 0.01
+    occupations = 'smearing'
+    smearing = 'gaussian'
+    degauss = 0.02
+/
+&ELECTRONS
+    diagonalization = 'david'
+    electron_maxstep = 200
+    mixing_mode = 'local-TF'
+    mixing_beta = 0.40
+    conv_thr = 1.0d-6
+/
+&IONS
+    ion_dynamics = 'bfgs'
+    upscale = 10
+/
+
+ATOMIC_SPECIES
+Rh      102.905    rh_pbe_v1.4.uspp.F.UPF 
+
+ATOMIC_POSITIONS angstrom
+Rh   1.3554284   2.3476708   6.5906085
+Rh   -1.3554284   2.3476708   6.5906085
+Rh   2.7108568   0.0000000   6.5906085
+Rh   -0.0000000   -0.0000000   6.5906085
+Rh   2.7108568   3.1302277   4.4106939
+Rh   0.0000000   3.1302277   4.4106939
+Rh   4.0662852   0.7825569   4.4106939
+Rh   1.3554284   0.7825569   4.4106939
+Rh   1.3554284   3.9127847   2.2295220
+Rh   -1.3554284   3.9127847   2.2295220
+Rh   2.7108568   1.5651139   2.2295220
+Rh   0.0000000   1.5651139   2.2295220
+Rh   1.3554284   2.3476708   0.0496074
+Rh   -1.3554284   2.3476708   0.0496074
+Rh   2.7108568   0.0000000   0.0496074
+Rh   0.0000000   0.0000000   0.0496074
+
+K_POINTS automatic
+5 5 1 1 1 0
+
