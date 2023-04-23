@@ -33,4 +33,4 @@ def write_surf_coor(file_name: str, lines: list):
 
 relaxed_coor_file_name = 'slab_2x2' # file.pwo with relaxed coordinates
 relaxed_coor_list = get_relaxed_coor(relaxed_coor_file_name)
-write_relaxed_coor('slab_relaxed_coor.dat', relaxed_coor_list)
+write_surf_coor('slab_relaxed_coor.dat', relaxed_coor_list)
