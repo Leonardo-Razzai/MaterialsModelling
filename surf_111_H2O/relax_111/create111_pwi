@@ -10,7 +10,7 @@ cat > $FILE.pwi << EOF
     calculation = 'relax'
     restart_mode = 'from_scratch'
     pseudo_dir = '/home/software.old/materia/pseudo'
-    outdir = '/home/STUDENTI/leonardo.razzai/Rh_work/surf_111_H2O'
+    outdir = '/home/STUDENTI/leonardo.razzai/Rh_work/surf_111_H2O/relax_111'
     prefix = '$num_layers-L'
     disk_io = 'nowf'
     max_seconds = 36000
