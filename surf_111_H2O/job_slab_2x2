@@ -11,11 +11,11 @@
 
 module load materia/qe/7.1_openmpi
 
-python3 generate_surf_coor.py
+python3 get_slab_coor.py
 
-FILE=surf111_H2O
+FILE=slab_2x2
 
-bash create111_H2O_pwi $FILE
+bash create_slab_2x2_pwi $FILE
 
 #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 # running

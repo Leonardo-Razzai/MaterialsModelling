@@ -43,7 +43,9 @@ def write_new_coor(file_name='new_coor.dat'):
     new_coord_list.append(relaxed_coor + a1 + a2)
 
   with open(file_name, 'w') as file:
-    for coor in new_coord_list:
+    size = len(new_coord_list)
+    for i in range(size):
+      coor = new_coord_list[size-1 - i]
       print_point(file, coor)
 
 relaxed_coor_file_name = 'n_layers4' # file.pwo with relaxed coordinates
