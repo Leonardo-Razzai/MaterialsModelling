@@ -1,10 +1,9 @@
 JOB*
 jobscript
 murn_*
-*.pwo
-*.pwi
 *.pyc
 *.save
 *.update
 *.bfgs
 *CRASH
+*-L*
