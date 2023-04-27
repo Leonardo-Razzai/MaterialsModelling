@@ -1,0 +1,4 @@
+#!/bin/bash -l
+bash create_H2O_on_surf_pwi OT
+bash create_H2O_on_surf_pwi fcc
+bash create_H2O_on_surf_pwi hcp

@@ -8,12 +8,12 @@ python3 get_H2O_on_surf_coor.py $sym_point
 cat > $FILE.pwi << EOF
 &CONTROL
     calculation = 'relax'
-    restart_mode = 'from_scratch'
+    restart_mode = 'restart'
     pseudo_dir = '/home/software.old/materia/pseudo'
-    outdir = '/home/STUDENTI/leonardo.razzai/Rh_work/surf_111_H2O'
+    outdir = '/home/STUDENTI/leonardo.razzai/Rh_work/surf_111_H2O/H2O_at_$sym_point'
     prefix = '$FILE-L'
     disk_io = 'nowf'
-    max_seconds = 72000
+    max_seconds = 144000
 /
 &SYSTEM
     ibrav = 4
@@ -33,7 +33,7 @@ cat > $FILE.pwi << EOF
     diagonalization = 'david'
     electron_maxstep = 200
     mixing_mode = 'local-TF'
-    mixing_beta = 0.40
+    mixing_beta = 0.50
     conv_thr = 1.0d-6
 /
 &IONS

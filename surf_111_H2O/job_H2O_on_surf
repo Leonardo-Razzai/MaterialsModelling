@@ -1,27 +1,17 @@
 #!/bin/bash -l
-#SBATCH --time=01:00:00
+#SBATCH --time=20:00:00
 #SBATCH --nodes=1
 #SBATCH --mem=64G
 #SBATCH --constraint=ib          
 #SBATCH --ntasks-per-node=16
 #SBATCH --sockets-per-node=2
 #SBATCH --partition=b1,b2,b3,b4,b5,m1,m2
-#SBATCH --job-name=@_@
+#SBATCH --job-name=surf
 #SBATCH --output=JOB.o
 
-module load materia/qe/7.1_openmpi 
-
-FILE_OT=H2O_at_OT
-FILE_fcc=H2O_at_fcc
-FILE_hcp=H2O_at_hcp
-
-bash create_H2O_on_surf_pwi OT
-bash create_H2O_on_surf_pwi fcc
-bash create_H2O_on_surf_pwi hcp
+FILE=H2O_at_$1
 
 #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 # running
-
-srun -n 16 pw.x -nk 1 -input $FILE_OT.pwi > $FILE_OT.pwo
-srun -n 16 pw.x -nk 1 -input $FILE_fcc.pwi > $FILE_fcc.pwo
-srun -n 16 pw.x -nk 1 -input $FILE_hcp.pwi > $FILE_hcp.pwo
+module load materia/qe/7.1_openmpi 
+srun -n 16 pw.x -nk 1 -input $FILE.pwi > $FILE.pwo
