@@ -65,8 +65,9 @@ df.style
 with open("../../report/Sections/sec1/ecut_table.tex", "w") as ecut_f:
         ecut_f.write(latex_table)
         
-print(latex_table)
-
+# print(latex_table)
+print(f'Minimum energy at ecut = 35 is {ecut_35.min_energy:.5f} Ry')
 ax.grid()
 ax.legend(loc='upper left')
 plt.savefig('../../report/Figures/ecut_vs_alat.png')
+plt.show()
