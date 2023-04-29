@@ -34,7 +34,7 @@ cat > $FILE.pwi << EOF
     electron_maxstep = 200
     mixing_mode = 'local-TF'
     mixing_beta = 0.50
-    conv_thr = 1.0d-6
+    conv_thr = 1.0d-4
 /
 &IONS
     ion_dynamics = 'bfgs'
