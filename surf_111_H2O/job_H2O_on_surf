@@ -3,9 +3,9 @@
 #SBATCH --nodes=1
 #SBATCH --mem=64G
 #SBATCH --constraint=ib          
-#SBATCH --ntasks-per-node=16
+#SBATCH --ntasks-per-node=56
 #SBATCH --sockets-per-node=2
-#SBATCH --partition=b1,b2,b3,b4,b5,m1,m2
+#SBATCH --partition=m1,m2,m3
 #SBATCH --job-name=surf
 #SBATCH --output=JOB.o
 
@@ -13,5 +13,6 @@ FILE=H2O_at_$1
 
 #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 # running
-module load materia/qe/7.1_openmpi 
-srun -n 16 pw.x -nk 1 -input $FILE.pwi > $FILE.pwo
+source /home/software/materia/intel/oneapi/setvars.sh --force
+module load materia/qe/7.1_intel-oneapi
+srun -n 56 pw.x -nk 1 -input $FILE.pwi > $FILE.pwo
