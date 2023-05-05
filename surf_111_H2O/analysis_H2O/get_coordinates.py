@@ -1,7 +1,9 @@
 import numpy as np
 import sys
 
+# sym_pointhas to be OT, fcc, o hcp
 sym_point = sys.argv[1]
+# file from which you want to exctarct final coordinates
 file_name = f'../H2O_at_{sym_point}'
 
 def get_relaxed_coor(relaxed_coor_file_name)->list:
@@ -32,7 +34,7 @@ def get_relaxed_coor(relaxed_coor_file_name)->list:
 def print_coor(file, coor):
   file.write(f'{coor[0]} {coor[1]} {coor[2]}\n')
   
-def write_coor_to_file(coordinates, file_name=f'{sym_point}_coor.dat'):
+def write_coor_to_file(coordinates, file_name=f'data/{sym_point}_coor.dat'):
 
   with open(file_name, 'w') as file:
     for coor in coordinates:
@@ -45,5 +47,8 @@ def write_coor(coordinates):
   print(f'{coor_O[2]} {mean_z}')
   
 coordinates = get_relaxed_coor(file_name)
-write_coor_to_file(coordinates)
+file_to_write = f'data/{sym_point}_coor.dat'
+# write all the coordinates to the file
+write_coor_to_file(coordinates, file_to_write)
+# write z_O and mean Z_Rh to stdout
 write_coor(coordinates)

@@ -21,15 +21,26 @@ class H2O_at_:
   
   def get_H2O_distance(self):
     print(f'Distace from surface for {self.sym_point} = {self.z_diff:.3f} A')
-
+  
+  def get_all(self):
+    print(f'\nH2O at {self.sym_point}')
+    print(f'e_tot = {self.e_tot}')
+    print(f'z_O = {self.z_O}')
+    print(f'z_last_layer = {self.z_last_layer}')
+    
 OT = H2O_at_('OT')
+print(f'e_slab = {OT.e_slab}')
+print(f'e_H2O = {OT.e_H2O}')
+OT.get_all()
 OT.get_adsorption_energy()
 OT.get_H2O_distance()
 
 fcc = H2O_at_('fcc')
+fcc.get_all()
 fcc.get_adsorption_energy()
 fcc.get_H2O_distance()
 
 hcp = H2O_at_('hcp')
+hcp.get_all()
 hcp.get_adsorption_energy()
 hcp.get_H2O_distance()
