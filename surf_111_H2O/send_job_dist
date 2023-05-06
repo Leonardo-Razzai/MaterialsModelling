@@ -1,0 +1,5 @@
+#!/bin/bash -l
+
+dist=$1
+bash create_dist_pwi $dist
+sbatch job_dist $dist
