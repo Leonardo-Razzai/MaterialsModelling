@@ -9,9 +9,8 @@ echo Final height:
 read dist_f
 
 echo "dist E_tot" > data/data_dist.dat
-E_tot=1
 for dist in $(seq $dist_f 0.5 $dist_i)
 do
-  # E_tot=$(grep -a Final ../diss_at_$dist.pwo | awk '{print $4}')
+  E_tot=$(grep -a Final ../diss_at_$dist.pwo | awk '{print $4}')
   echo "$dist $E_tot" >> data/data_dist.dat
 done
