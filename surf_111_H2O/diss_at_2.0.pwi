@@ -2,8 +2,9 @@
     calculation = 'relax'
     restart_mode = 'from_scratch'
     pseudo_dir = '/home/software.old/materia/pseudo'
-    outdir = '/home/STUDENTI/leonardo.razzai/Rh_work/surf_111_H2O/OHH_at_OT'
-    prefix = 'OHH_at_OT-L'
+    outdir = '/home/STUDENTI/leonardo.razzai/Rh_work/surf_111_H2O/change_dist'
+    prefix = 'diss_at_2.0-L'
+    nstep = 1000
     disk_io = 'nowf'
     max_seconds = 144000
 /
@@ -26,7 +27,6 @@
     electron_maxstep = 200
     mixing_mode = 'local-TF'
     mixing_beta = 0.50
-    conv_thr = 1.0d-4
 /
 &IONS
     ion_dynamics = 'bfgs'
@@ -39,9 +39,9 @@ O       15.9990    O.pbe-n-rrkjus_psl.1.0.0.UPF
 H       1.00784    H.pbe-rrkjus_psl.1.0.0.UPF
 
 ATOMIC_POSITIONS angstrom
-H   0.9815000   0.0000000   9.0326085
-H   -1.3554284   2.3476708   9.0326085
-O   0.0000000   0.0000000   9.0326085
+H   2.3369284   2.3476708   8.5906085
+H   1.1274346   3.3023232   8.5906085
+O   1.3554284   2.3476708   8.5906085  1  1  0
 Rh   1.3554284   2.3476708   6.5906085
 Rh   -1.3554284   2.3476708   6.5906085
 Rh   2.7108568   0.0000000   6.5906085
@@ -54,10 +54,10 @@ Rh   1.3554284   3.9127847   2.2295220
 Rh   -1.3554284   3.9127847   2.2295220
 Rh   2.7108568   1.5651139   2.2295220
 Rh   0.0000000   1.5651139   2.2295220
-Rh   1.3554284   2.3476708   0.0496074  0  0  0
-Rh   -1.3554284   2.3476708   0.0496074  0  0  0
-Rh   2.7108568   0.0000000   0.0496074  0  0  0
-Rh   0.0000000   0.0000000   0.0496074  0  0  0
+Rh   1.3554284   2.3476708   0.0496074  1  1  0
+Rh   -1.3554284   2.3476708   0.0496074  1  1  0
+Rh   2.7108568   0.0000000   0.0496074  1  1  0
+Rh   0.0000000   0.0000000   0.0496074  1  1  0
 
 K_POINTS automatic
 5 5 1 1 1 0

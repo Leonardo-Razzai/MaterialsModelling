@@ -15,4 +15,4 @@ FILE=OHH_at_$1
 # running
 source /home/software/materia/intel/oneapi/setvars.sh --force
 module load materia/qe/7.1_intel-oneapi
-srun -n 56 pw.x -nk 1 -input $FILE.pwi > $FILE.pwo
+mpirun -n 56 pw.x -nk 1 -input $FILE.pwi > $FILE.pwo

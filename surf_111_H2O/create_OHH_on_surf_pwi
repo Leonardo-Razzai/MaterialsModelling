@@ -8,7 +8,7 @@ python3 get_OHH_coordinates.py $sym_point
 cat > $FILE.pwi << EOF
 &CONTROL
     calculation = 'relax'
-    restart_mode = 'restart'
+    restart_mode = 'from_scratch'
     pseudo_dir = '/home/software.old/materia/pseudo'
     outdir = '/home/STUDENTI/leonardo.razzai/Rh_work/surf_111_H2O/$FILE'
     prefix = '$FILE-L'
