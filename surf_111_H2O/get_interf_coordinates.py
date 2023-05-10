@@ -102,10 +102,23 @@ def write_H2O_coor(file,
 relaxed_coor_file_name = 'slab_2x2' # file.pwo with relaxed coordinates
 relaxed_coor_list = get_relaxed_coor(relaxed_coor_file_name)
 
+def invert_sign_z(coor_list:list):
+  change_sign_z = np.array(
+    [[1, 0, 0],
+    [0, 1, 0],
+    [0, 0, -1]]
+  )
+  changed_z_list = []
+  for coor in coor_list:
+    new_coor = change_sign_z @ coor
+    changed_z_list.append(new_coor)
+  return np.array(changed_z_list)
+
 with open(f'interf_at_{height_from_surf}-coor.dat', 'w') as file:
   coor_last_Rh = relaxed_coor_list[0:3]
   slab_thickness = np.mean(coor_last_Rh, axis=0)[2]
-  super_slab_coor = -np.array(relaxed_coor_list) + np.array([0, 0, 2*height_from_surf + 2*slab_thickness])
+  print(slab_thickness)
+  super_slab_coor = invert_sign_z(relaxed_coor_list) + np.array([0, 0, 2*height_from_surf + 2*slab_thickness])
   super_slab_coor = np.flip(super_slab_coor, axis=0)
   write_surf_coor(file, super_slab_coor)
   write_H2O_coor(file, relaxed_coor_list)
