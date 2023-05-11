@@ -117,7 +117,6 @@ def invert_sign_z(coor_list:list):
 with open(f'interf_at_{height_from_surf}-coor.dat', 'w') as file:
   coor_last_Rh = relaxed_coor_list[0:3]
   slab_thickness = np.mean(coor_last_Rh, axis=0)[2]
-  print(slab_thickness)
   super_slab_coor = invert_sign_z(relaxed_coor_list) + np.array([0, 0, 2*height_from_surf + 2*slab_thickness])
   super_slab_coor = np.flip(super_slab_coor, axis=0)
   write_surf_coor(file, super_slab_coor)

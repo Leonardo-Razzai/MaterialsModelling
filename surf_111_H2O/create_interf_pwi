@@ -19,7 +19,7 @@ cat > $FILE.pwi << EOF
 &SYSTEM
     ibrav = 4
     celldm(1) = 10.245552
-    celldm(3) = 4.89897948
+    celldm(3) = 6.1017745
     nat = 35
     ntyp = 3
     ecutwfc = 35
