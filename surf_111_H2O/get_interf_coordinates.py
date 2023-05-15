@@ -1,7 +1,7 @@
 import numpy as np
 import sys
 
-FIX_OXYGEN = False
+FIX_OXYGEN = False  
 
 num_layers = 4
 num_cells = 2
