@@ -215,7 +215,7 @@ def write_H2O_coor(file,
     line = print_atom_coor(file, atom='O', coor=O_coor, write=False)
     file.write(line + '  1  1  0\n')
   else:
-    print_atom_coor(file, atom='O', coor=O_coor, write=False)
+    print_atom_coor(file, atom='O', coor=O_coor)
   
   
 if __name__ == "__main__":
@@ -243,7 +243,7 @@ if __name__ == "__main__":
     with open(f'interf_at_{dist_between_interf}-coor.dat', 'w') as file:
       coor_last_Rh = relaxed_coor_list[0:3]
       slab_thickness = np.mean(coor_last_Rh, axis=0)[2]
-      super_slab_coor = invert_sign_z(relaxed_coor_list) + np.array([0, 0, 2*dist_between_interf + 2*slab_thickness])
+      super_slab_coor = invert_sign_z(relaxed_coor_list) + np.array([0, 0, dist_between_interf + 2*slab_thickness])
       write_surf_coor_upper(file, super_slab_coor)
       write_H2O_coor(file, relaxed_coor_list)
       write_surf_coor(file, relaxed_coor_list)
