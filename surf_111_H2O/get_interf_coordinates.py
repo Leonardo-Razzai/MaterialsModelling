@@ -1,13 +1,13 @@
 import numpy as np
 import sys
 
-FIX_OXYGEN = True
+FIX_OXYGEN = False  
 
 num_layers = 4
 num_cells = 2
 num_atoms_per_layer = num_cells * num_cells
 # NB: give integer numbers as .0
-height_from_surf = float(sys.argv[1])
+dist_between_interf = float(sys.argv[1])
 
 a_bohr = 7.2447 / np.sqrt(2)
 a = a_bohr * 0.529177249
@@ -149,6 +149,8 @@ def write_next_coor(file,
     if FIX_OXYGEN & (coor_dict['element'] == 'O'):
       line = print_atom_coor(file, coor_dict['element'], coor_dict['coor'], write=False)
       file.write(line + '  1  1  0\n')
+    elif not FIX_OXYGEN & (coor_dict['element'] == 'O'):
+      print_atom_coor(file, coor_dict['element'], coor_dict['coor'])
     else:
       print_atom_coor(file, coor_dict['element'], coor_dict['coor'])
       
@@ -194,7 +196,7 @@ def write_H2O_coor(file,
   last_layers = get_last_layers(surf_coor_list, num=3)
   OT = last_layers[0][3]
 
-  H2O_height = OT[2] + height_from_surf
+  H2O_height = OT[2] + dist_between_interf / 2
   
   O_base = np.array([0, 0, 0])
   H1_base = np.array([1, 0, 0]) * bond_length
@@ -213,29 +215,35 @@ def write_H2O_coor(file,
     line = print_atom_coor(file, atom='O', coor=O_coor, write=False)
     file.write(line + '  1  1  0\n')
   else:
-    print_atom_coor(file, atom='O', coor=O_coor, write=False)
+    print_atom_coor(file, atom='O', coor=O_coor)
   
   
 if __name__ == "__main__":
   
   try:
-    relaxed_coor_file_name = f'interf_at_{height_from_surf + 0.5}' # file.pwo with relaxed coordinates
+    
+    # - takes coordinates from old pwo
+    # - water is unchanged   
+    # - slab up is moved down by 0.25 A
+    # - slab down is moved up by 0.25 A
+    
+    relaxed_coor_file_name = f'interf_at_{dist_between_interf + 0.5}' # file.pwo with relaxed coordinates
     relaxed_coor_list = get_relaxed_coor_interf(relaxed_coor_file_name)
     slab_up, H2O, slab_down = split_slabs_coor(relaxed_coor_list)
     
-    with open(f'interf_at_{height_from_surf}-coor.dat', 'w') as file:
+    with open(f'interf_at_{dist_between_interf}-coor.dat', 'w') as file:
       write_next_coor(file, slab_up, H2O, slab_down)
             
       
   except FileNotFoundError:
     relaxed_coor_file_name = 'slab_2x2' # file.pwo with relaxed coordinates
-    print(f'interf_at_{height_from_surf - 0.5}.pwo not found, taking coordinates from salb_2x2.pwo')
+    print(f'interf_at_{dist_between_interf + 0.5}.pwo not found, taking coordinates from salb_2x2.pwo')
     relaxed_coor_list = get_relaxed_coor(relaxed_coor_file_name)
 
-    with open(f'interf_at_{height_from_surf}-coor.dat', 'w') as file:
+    with open(f'interf_at_{dist_between_interf}-coor.dat', 'w') as file:
       coor_last_Rh = relaxed_coor_list[0:3]
       slab_thickness = np.mean(coor_last_Rh, axis=0)[2]
-      super_slab_coor = invert_sign_z(relaxed_coor_list) + np.array([0, 0, 2*height_from_surf + 2*slab_thickness])
+      super_slab_coor = invert_sign_z(relaxed_coor_list) + np.array([0, 0, dist_between_interf + 2*slab_thickness])
       write_surf_coor_upper(file, super_slab_coor)
       write_H2O_coor(file, relaxed_coor_list)
       write_surf_coor(file, relaxed_coor_list)
