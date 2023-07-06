@@ -1,0 +1,61 @@
+#!/bin/bash
+
+sym_point=$1
+FILE=CO2_at_$sym_point
+
+python3 get_CO2_on_surf_coor.py $sym_point
+
+cat > $FILE.pwi << EOF
+&CONTROL
+    calculation = 'relax'
+    restart_mode = 'restart'
+    pseudo_dir = '/home/STUDENTI/enrico.pedretti/pseudo/'
+    outdir = '/home/STUDENTI/leonardo.razzai/Rh_work/surf_111_CO2/CO2_at_$sym_point'
+    prefix = '$FILE-L'
+    disk_io = 'nowf'
+    max_seconds = 144000
+/
+&SYSTEM
+    ibrav = 4
+    celldm(1) = 10.245552
+    celldm(3) = 4.89897948
+    nat = 19
+    ntyp = 3
+    ecutwfc = 35
+    ecutrho = 280
+    nspin = 2
+    starting_magnetization(1) = 0.01
+    occupations = 'smearing'
+    smearing = 'gaussian'
+    degauss = 0.02
+/
+&ELECTRONS
+    diagonalization = 'david'
+    electron_maxstep = 200
+    mixing_mode = 'local-TF'
+    mixing_beta = 0.50
+    conv_thr = 1.0d-4
+/
+&IONS
+    ion_dynamics = 'bfgs'
+    upscale = 10
+/
+
+ATOMIC_SPECIES
+Rh      102.905    rh_pbe_v1.4.uspp.F.UPF
+O       15.9990    O.pbe-n-rrkjus_psl.1.0.0.UPF   
+C       12.0112    C.pbe-n-rrkjus_psl.1.0.0.UPF
+
+ATOMIC_POSITIONS angstrom
+EOF
+
+cat CO2_at_$sym_point-coor.dat >> $FILE.pwi
+
+cat >> $FILE.pwi << EOF
+
+K_POINTS automatic
+5 5 1 1 1 0
+
+EOF
+
+rm CO2_at_$sym_point-coor.dat
