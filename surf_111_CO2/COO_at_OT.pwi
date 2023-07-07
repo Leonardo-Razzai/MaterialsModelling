@@ -1,0 +1,64 @@
+&CONTROL
+    calculation = 'relax'
+    restart_mode = 'from_scratch'
+    pseudo_dir = '/home/STUDENTI/enrico.pedretti/pseudo/'
+    outdir = '/home/STUDENTI/leonardo.razzai/Rh_work/surf_111_H2O/COO_at_OT'
+    prefix = 'COO_at_OT-L'
+    disk_io = 'nowf'
+    max_seconds = 144000
+/
+&SYSTEM
+    ibrav = 4
+    celldm(1) = 10.245552
+    celldm(3) = 4.89897948
+    nat = 19
+    ntyp = 3
+    ecutwfc = 35
+    ecutrho = 280
+    nspin = 2
+    starting_magnetization(1) = 0.01
+    occupations = 'smearing'
+    smearing = 'gaussian'
+    degauss = 0.02
+/
+&ELECTRONS
+    diagonalization = 'david'
+    electron_maxstep = 200
+    mixing_mode = 'local-TF'
+    mixing_beta = 0.50
+    conv_thr = 1.0d-4
+/
+&IONS
+    ion_dynamics = 'bfgs'
+    upscale = 10
+/
+
+ATOMIC_SPECIES
+Rh      102.905    rh_pbe_v1.4.uspp.F.UPF
+O       15.9990    O.pbe-n-rrkjus_psl.1.0.0.UPF   
+C       12.0112    C.pbe-n-rrkjus_psl.1.0.0.UPF
+
+ATOMIC_POSITIONS angstrom
+O   2.5324987   2.3476708   9.0326085
+O   0.0000000   4.6953417   9.0326085
+C   1.3554284   2.3476708   9.0326085
+Rh   1.3554284   2.3476708   6.5906085
+Rh   -1.3554284   2.3476708   6.5906085
+Rh   2.7108568   0.0000000   6.5906085
+Rh   0.0000000   0.0000000   6.5906085
+Rh   2.7108568   3.1302277   4.4106939
+Rh   0.0000000   3.1302277   4.4106939
+Rh   4.0662852   0.7825569   4.4106939
+Rh   1.3554284   0.7825569   4.4106939
+Rh   1.3554284   3.9127847   2.2295220
+Rh   -1.3554284   3.9127847   2.2295220
+Rh   2.7108568   1.5651139   2.2295220
+Rh   0.0000000   1.5651139   2.2295220
+Rh   1.3554284   2.3476708   0.0496074  0  0  0
+Rh   -1.3554284   2.3476708   0.0496074  0  0  0
+Rh   2.7108568   0.0000000   0.0496074  0  0  0
+Rh   0.0000000   0.0000000   0.0496074  0  0  0
+
+K_POINTS automatic
+5 5 1 1 1 0
+

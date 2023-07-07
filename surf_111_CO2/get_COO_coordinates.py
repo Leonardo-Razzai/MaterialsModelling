@@ -7,6 +7,7 @@ num_atoms_per_layer = num_cells * num_cells
 
 a_bohr = 7.2447 / np.sqrt(2)
 a = a_bohr * 0.529177249
+a1 = a * np.array([1, 0, 0])
 a2 = a * np.array([-1/2, np.sqrt(3)/2, 0])
 
 sym_point = sys.argv[1]
@@ -105,14 +106,14 @@ def write_OHH_coor(file,
   else:
     print('Choose a correct symmetry point:\n- OT\n- fcc\n- hcp')
   
-  print_atom_coor(file, atom='O', coor=O1_coor)
-  print_atom_coor(file, atom='O', coor=O2_coor)
-  print_atom_coor(file, atom='C', coor=C_coor)
+  print_atom_coor(file, atom='O', coor=O1_coor + a1 + a2)
+  print_atom_coor(file, atom='O', coor=O2_coor + a1 + a2)
+  print_atom_coor(file, atom='C', coor=C_coor + a1 + a2)
 
 
 relaxed_coor_file_name = 'slab_2x2' # file.pwo with relaxed coordinates
 relaxed_coor_list = get_relaxed_coor(relaxed_coor_file_name)
 
-with open(f'OHH_at_{sym_point}-coor.dat', 'w') as file:
+with open(f'COO_at_{sym_point}-coor.dat', 'w') as file:
   write_OHH_coor(file, relaxed_coor_list, sym_point=sym_point)
   write_surf_coor(file, relaxed_coor_list)
