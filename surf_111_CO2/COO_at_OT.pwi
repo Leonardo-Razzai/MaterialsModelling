@@ -2,7 +2,7 @@
     calculation = 'relax'
     restart_mode = 'from_scratch'
     pseudo_dir = '/home/STUDENTI/enrico.pedretti/pseudo/'
-    outdir = '/home/STUDENTI/leonardo.razzai/Rh_work/surf_111_H2O/COO_at_OT'
+    outdir = '/home/STUDENTI/leonardo.razzai/Rh_work/surf_111_CO2/COO_at_OT'
     prefix = 'COO_at_OT-L'
     disk_io = 'nowf'
     max_seconds = 144000

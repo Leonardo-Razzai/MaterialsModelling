@@ -10,7 +10,7 @@ cat > $FILE.pwi << EOF
     calculation = 'relax'
     restart_mode = 'from_scratch'
     pseudo_dir = '/home/STUDENTI/enrico.pedretti/pseudo/'
-    outdir = '/home/STUDENTI/leonardo.razzai/Rh_work/surf_111_H2O/$FILE'
+    outdir = '/home/STUDENTI/leonardo.razzai/Rh_work/surf_111_CO2/$FILE'
     prefix = '$FILE-L'
     disk_io = 'nowf'
     max_seconds = 144000

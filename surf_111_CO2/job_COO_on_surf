@@ -5,7 +5,7 @@
 #SBATCH --constraint=ib          
 #SBATCH --ntasks-per-node=56
 #SBATCH --sockets-per-node=2
-#SBATCH --partition=m1,m2,m3
+#SBATCH --partition=m1,m3
 #SBATCH --job-name=COO
 #SBATCH --output=JOB.o
 

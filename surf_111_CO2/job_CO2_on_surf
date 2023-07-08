@@ -5,11 +5,13 @@
 #SBATCH --constraint=ib          
 #SBATCH --ntasks-per-node=56
 #SBATCH --sockets-per-node=2
-#SBATCH --partition=m1,m2,m3
-#SBATCH --job-name=surf
+#SBATCH --partition=m1,m3
 #SBATCH --output=JOB.o
+#SBATCH --error=JOB.e
+#SBATCH --job-name=CO2_ads
 
-FILE=H2O_at_$1
+
+FILE=CO2_at_$1
 
 #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 # running
