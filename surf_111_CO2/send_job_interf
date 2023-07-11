@@ -1,0 +1,5 @@
+#!/bin/bash -l
+
+dist=$1
+bash create_interf_pwi $dist
+sbatch job_interf $dist
