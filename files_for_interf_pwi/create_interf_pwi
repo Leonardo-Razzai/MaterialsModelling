@@ -1,0 +1,61 @@
+#!/bin/bash
+
+dist=$1
+FILE=interf_at_$dist
+
+python3 get_interf_coordinates.py $dist
+
+cat > $FILE.pwi << EOF
+&CONTROL
+    calculation = 'relax'
+    restart_mode = 'from_scratch'
+    pseudo_dir = '/home/software.old/materia/pseudo'
+    outdir = '/home/STUDENTI/leonardo.razzai/Rh_work/surf_111_H2O/interface'
+    prefix = '$FILE-L'
+    nstep = 1000
+    disk_io = 'nowf'
+    max_seconds = 144000
+/
+&SYSTEM
+    ibrav = 4
+    celldm(1) = 10.245552
+    celldm(3) = 6.1017745
+    nat = 35
+    ntyp = 3
+    ecutwfc = 35
+    ecutrho = 280
+    nspin = 2
+    starting_magnetization(1) = 0.01
+    occupations = 'smearing'
+    smearing = 'gaussian'
+    degauss = 0.02
+/
+&ELECTRONS
+    diagonalization = 'david'
+    electron_maxstep = 200
+    mixing_mode = 'local-TF'
+    mixing_beta = 0.50
+/
+&IONS
+    ion_dynamics = 'bfgs'
+    upscale = 10
+/
+
+ATOMIC_SPECIES
+Rh      102.905    rh_pbe_v1.4.uspp.F.UPF
+O       15.9990    O.pbe-n-rrkjus_psl.1.0.0.UPF   
+H       1.00784    H.pbe-rrkjus_psl.1.0.0.UPF
+
+ATOMIC_POSITIONS angstrom
+EOF
+
+cat $FILE-coor.dat >> $FILE.pwi
+
+cat >> $FILE.pwi << EOF
+
+K_POINTS automatic
+5 5 1 1 1 0
+
+EOF
+
+rm $FILE-coor.dat
