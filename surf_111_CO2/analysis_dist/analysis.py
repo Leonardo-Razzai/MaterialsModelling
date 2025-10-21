@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+from scipy.interpolate import interp1d
 
 Ry_to_ev = 13.6057039763
 
@@ -31,16 +32,21 @@ class change_dist:
     self.e_tot = self.data['E_tot'].to_numpy() * Ry_to_ev # in eV
     self.dist = self.data['dist'].to_numpy()
     self.far_energy = self.e_tot[-1]
+    self.delta_E = self.e_tot - self.far_energy
     
   def plot_data(self):
+    
+    f_inter = interp1d(self.dist, self.delta_E, kind='cubic')
+    d = np.linspace(self.dist[0], self.dist[-1], 100)
+    
     _, ax = plt.subplots(1, 1, figsize=(9, 6))
-    ax.plot(self.dist, self.e_tot - self.far_energy, 'o', color='red')
-    # ax.plot(d, f_inter(d), '-', color='royalblue')
+    ax.plot(d, f_inter(d), '--', color='black', lw=2.5)
+    ax.plot(self.dist, self.e_tot - self.far_energy, 'o', color='red', markersize=8)
     ax.set_title(r'$\Delta E$ approaching the surface', fontdict=title_font)
     ax.set_xlabel('dist', fontdict=base_font)
     ax.set_ylabel(r'$\Delta E$ (eV)', fontdict=base_font)
     ax.grid()
-    plt.savefig(f'../../report/Figures/change_distance.png')
+    plt.savefig(f'../../../report/Figures/CO2/change_distance.png')
     plt.show()
 
 

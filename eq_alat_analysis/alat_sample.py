@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+bohr_to_A = 0.529177249
 
 class ecut_sample:
   def __init__(self, ecut: int) -> None:
@@ -37,5 +38,6 @@ class ecut_sample:
     self.alat_min_en = self.alat_fit[self.energy_fit == self.min_energy][0]
     
   def plot_fit(self, ax, color='blue'):
-    ax.plot(self.alat_fit, self.energy_fit, label=f'Ecut= {self.ecut}, alat_min= {self.alat_min_en:.3f}', color=color)
-    ax.plot(self.alat_exp, self.energy_exp, 'o', color=color)
+    offset = 171
+    ax.plot(self.alat_fit * bohr_to_A, self.energy_fit + offset, label=f'ecut= {self.ecut} Ry', color=color, linewidth=2)
+    ax.plot(self.alat_exp * bohr_to_A, self.energy_exp + offset, 'o', color=color, markersize=8)

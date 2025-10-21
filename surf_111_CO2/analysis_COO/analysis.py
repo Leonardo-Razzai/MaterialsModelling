@@ -2,12 +2,12 @@ import numpy as np
 import pandas as pd
 
 Ry_to_ev = 13.6057039763
-e_i = -2773.3900844787 # Ry
+e_i = -2815.807122 # Ry
 
 class OHH_at_:
   def __init__(self, sym_ponit: str) -> None:
     self.sym_point = sym_ponit
-    self.data = pd.read_csv(f'data/data_{sym_ponit}.dat', sep=' ')
+    self.data = pd.read_csv(f'data/data_{sym_ponit}.csv', sep=' ')
     self.e_tot = float(self.data['E_tot'][0])
     self.z_C = float(self.data['z_C'][0])
     self.z_last_layer = float(self.data['z_last_layer'][0])
