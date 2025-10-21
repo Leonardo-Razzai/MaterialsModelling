@@ -7,3 +7,4 @@ murn_*
 *.bfgs
 *CRASH
 *-L*
+__pycache__
